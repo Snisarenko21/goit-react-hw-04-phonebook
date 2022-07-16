@@ -60,6 +60,42 @@ export class App extends Component {
       filter: '',
     }));
   };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    if (contacts) {
+      this.setState({ contacts: JSON.parse(contacts) });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
+  // componentDidMount() {
+  //   // console.log('App componentDidMount');
+  //   const contacts = localStorage.getItem('contacts');
+  //   const parseContacts = JSON.parse(contacts);
+  //   if (parseContacts) {
+  //     this.setState({ contacts: parseContacts });
+  //   }
+  // }
+  // componentDidUpdate(prevProps, prevState) {
+  //   // console.log('App   componentDidUpdate');
+  //   // console.log(prevState);
+  //   // console.log(this.state);
+  //   // проверяем, если состояние contacts до обновления не равно состоянию contacts после обновления
+  //   // (а они не равны, поскольку при изменении contacts(стейта)создаются новые масивы и сравнивая по ссылке эти массивы не равны)
+  //   // если они не равны, значит стейт обновился,  то записываем в хранилище
+  //   if (this.state.contacts !== prevState.contacts) {
+  //     // console.log('обновился стейт contacts, записываем его в хранилище');
+  //     // берем текущие contacts и записиваем их в локалсторидж
+  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  //   }
+  // }
+
   render() {
     const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
