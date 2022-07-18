@@ -17,6 +17,19 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    if (contacts) {
+      this.setState({ contacts: JSON.parse(contacts) });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   addContact = ({ name, number }) => {
     const normalizedName = name.toLowerCase();
     const ifExist = this.state.contacts.some(
@@ -60,19 +73,6 @@ export class App extends Component {
       filter: '',
     }));
   };
-
-  componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    if (contacts) {
-      this.setState({ contacts: JSON.parse(contacts) });
-    }
-  }
-
-  componentDidUpdate(_, prevState) {
-    if (prevState.contacts !== this.state.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-    }
-  }
 
   render() {
     const { filter } = this.state;
