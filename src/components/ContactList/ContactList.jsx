@@ -30,22 +30,3 @@ ContactList.propTypes = {
 };
 
 export default ContactList;
-
-// const ContactList = ({ contacts, onDeleteContact }) => (
-//   <ul className={css.ContactList}>
-//     {contacts.map(({ id, name, number }) => (
-//       <li key={id} className={css.ContactListItem}>
-//         <p className={css.ContactListText}>
-//           {name} : <span className={css.ContactListNumber}> {number} </span>
-//         </p>
-//         <button
-//           className={css.ContactListButton}
-//           type="button"
-//           onClick={() => onDeleteContact(id)}
-//         >
-//           delete
-//         </button>
-//       </li>
-//     ))}
-//   </ul>
-// );

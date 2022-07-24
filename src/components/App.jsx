@@ -40,36 +40,6 @@ export function App() {
     return setContacts([newContact, ...contacts]);
   };
 
-  // const normalizedName = name.toLowerCase();
-  // const ifExist = this.state.contacts.some(
-  //   contact => contact.name.toLowerCase() === normalizedName
-  // );
-  // if (ifExist) {
-  //   Notify.failure(`${name} is already in contacts`, {
-  //     clickToClose: true,
-  //     distance: '20px',
-  //     fontFamily: 'inherit',
-  //   });
-  //   return;
-  // }
-
-  //   this.setState(({ contacts }) => ({
-  //     contacts: [contact, ...contacts],
-  //   }));
-  // };
-
-  // changeFilter = e => {
-  //   this.setState({ filter: e.currentTarget.value });
-  // };
-
-  // getVisibleContacts = () => {
-  //   const { contacts, filter } = this.state;
-  //   const normalizedFilter = filter.toLowerCase();
-  //   return contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(normalizedFilter)
-  //   );
-  // };
-
   const deleteContact = newContactId => {
     setContacts(state => state.filter(contact => contact.id !== newContactId));
   };
