@@ -6,18 +6,17 @@ import ContactList from './ContactList';
 import Filter from './Filter';
 import css from './App.module.css';
 
-export function App() {
-  const [contacts, setContacts] = useState(() => {
-    return (
-      JSON.parse(localStorage.getItem('contacts')) ?? [
-        { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-        { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-        { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-        { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-      ]
-    );
-  });
+const initialContacts = [
+  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+];
 
+export default function App() {
+  const [contacts, setContacts] = useState(() => {
+    return JSON.parse(localStorage.getItem('contacts')) ?? initialContacts;
+  });
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -30,14 +29,16 @@ export function App() {
       name,
       number,
     };
-    if (
-      contacts.some(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      return toast.error(`${name} is already in contacts!`);
+
+    const existingContacts = contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    if (existingContacts) {
+      toast.error(`${name} is already in contacts!`);
+
+      return;
     }
-    return setContacts([newContact, ...contacts]);
+    setContacts([newContact, ...contacts]);
   };
 
   const deleteContact = newContactId => {
